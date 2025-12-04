@@ -1,24 +1,21 @@
 services:
-  frontend:
-    build: ./frontend
+  game:
+    build: ./game
     ports:
-      - "5173:5173"          # Vite dev server
+      - "5173:5173"
     volumes:
-      - ./frontend:/app
+      - ./game:/app
       - /app/node_modules
     environment:
-      - VITE_SOCKET_URL=http://localhost:3001   # important for client to find backend
+      - CHOKIDAR_USEPOLLING=true
+      - VITE_SOCKET_URL=http://localhost:4000   # ← changed
     depends_on:
-      - backend
+      - server
 
-  backend:
-    build: ./backend
+  server:
+    build: ./server
     ports:
-      - "3001:3001"          # Socket.IO server
+      - "4000:4000"           # ← changed from 3001 → 4000
     volumes:
-      - ./backend:/app
+      - ./server:/app
       - /app/node_modules
-
-networks:
-  default:
-    name: multiplayer-network

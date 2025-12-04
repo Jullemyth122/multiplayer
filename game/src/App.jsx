@@ -213,7 +213,7 @@ function App() {
   }, [keys]);
 
   useEffect(() => {
-    const s = io('http://localhost:3001');
+    const s = io('http://localhost:4000');
     setSocket(s);
 
     s.on('init', ({ playerId: pid, players: initPlayers }) => {

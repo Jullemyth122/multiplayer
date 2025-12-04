@@ -1,7 +1,18 @@
 FROM node:22
+
 WORKDIR /app
+
 COPY package*.json ./
+
+# Install nodemon globally to ensure it's in PATH
+RUN npm install -g nodemon
+
+# Set environment and install dependencies
+ENV NODE_ENV=development
 RUN npm install
+
 COPY . .
-EXPOSE 3001
-CMD ["npm", "run", "dev", "--", "--host"]
+
+EXPOSE 4000
+
+CMD ["npm", "run", "dev"]
